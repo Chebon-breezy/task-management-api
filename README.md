@@ -1,26 +1,121 @@
-# Lumen PHP Framework
+# Task Management API
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel/lumen-framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://img.shields.io/packagist/v/laravel/lumen-framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://img.shields.io/packagist/l/laravel/lumen)](https://packagist.org/packages/laravel/lumen-framework)
+A RESTful API built with Lumen for managing tasks. This API provides CRUD operations for tasks with additional features like filtering, searching, and pagination.
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+## Features
 
-> **Note:** In the years since releasing Lumen, PHP has made a variety of wonderful performance improvements. For this reason, along with the availability of [Laravel Octane](https://laravel.com/docs/octane), we no longer recommend that you begin new projects with Lumen. Instead, we recommend always beginning new projects with [Laravel](https://laravel.com).
+-   Create, Read, Update, and Delete tasks
+-   Filter tasks by status and due date
+-   Search tasks by title
+-   Pagination support
+-   Data validation
+-   Error handling
 
-## Official Documentation
+## Requirements
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+-   PHP >= 7.4
+-   PostgreSQL >= 12
+-   Composer
 
-## Contributing
+## Installation
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. Clone the repository:
 
-## Security Vulnerabilities
+```bash
+git clone https://github.com/Chebon-breezy/task-management-api.git
+cd task-management-api
+```
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+2. Install dependencies:
 
-## License
+```bash
+composer install
+```
 
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+3. Configure environment:
+
+```bash
+cp .env.example .env
+# Update database credentials in .env file
+```
+
+4. Create database:
+
+```bash
+createdb task_management
+```
+
+5. Run migrations:
+
+```bash
+php artisan migrate
+```
+
+## API Endpoints
+
+### Get All Tasks
+
+```
+GET /api/tasks
+```
+
+Query Parameters:
+
+-   `status`: Filter by status (pending/completed)
+-   `due_date`: Filter by due date (YYYY-MM-DD)
+-   `search`: Search by title
+-   `page`: Page number for pagination
+-   `per_page`: Items per page
+
+### Create Task
+
+```
+POST /api/tasks
+```
+
+Request Body:
+
+```json
+{
+    "title": "Task Title",
+    "description": "Task Description",
+    "status": "pending",
+    "due_date": "2024-05-01"
+}
+```
+
+### Get Single Task
+
+```
+GET /api/tasks/{id}
+```
+
+### Update Task
+
+```
+PUT /api/tasks/{id}
+```
+
+Request Body: Same as Create Task
+
+### Delete Task
+
+```
+DELETE /api/tasks/{id}
+```
+
+## Testing
+
+Run the test suite:
+
+```bash
+./vendor/bin/phpunit
+```
+
+## Development Server
+
+Start the development server:
+
+```bash
+php -S localhost:8000 -t public
+```
