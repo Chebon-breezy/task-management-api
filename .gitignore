@@ -1,6 +1,10 @@
 /vendor
 /.idea
+/.vscode
+.env
+.env.*.php
+.env.php
+.phpunit.result.cache
 Homestead.json
 Homestead.yaml
-.env
-.phpunit.result.cache
+.DS_Store
